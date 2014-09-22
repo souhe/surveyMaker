@@ -1,3 +1,4 @@
-var Dispatcher = require('es6!./dispatchers/dispatcher.js');
+var React = require('react');
+var app = require('./components/app.jsx');
 
-console.log(Dispatcher);
+React.renderComponent(app(null), document.getElementById("main"));
