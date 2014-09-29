@@ -5,6 +5,7 @@
   "main": "gulpfile.js",
   "dependencies": {
     "es6-loader": "^0.2.0",
+    "es6-promise": "^1.0.0",
     "gulp": "^3.8.8",
     "gulp-concat": "^2.4.1",
     "gulp-webpack": "^0.3.0",
