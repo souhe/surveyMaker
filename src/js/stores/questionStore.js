@@ -16,9 +16,9 @@ _questions[1] = {
     title: "Czy lubisz arbuzy?",
     description: "",
     answers: [{
-        text: "tak"    
+        text: "tak"
     }, {
-        text: "nie"    
+        text: "nie"
     }]
 };
 _questions[2] = {
@@ -27,52 +27,53 @@ _questions[2] = {
     title: "Jaki jest standardowy rozmiar arbuza?",
     description: "O co chodzi z tymi arbuzami...",
     answers: [{
-        text: "1 kg"    
+        text: "1 kg"
     }, {
-        text: "2 kg"    
+        text: "2 kg"
     }, {
-        text: "5 kg"    
+        text: "5 kg"
     }, {
-        text: "10 kg"    
+        text: "10 kg"
     }]
 };
 
 function _create(){
-    
-};
+
+}
 
 function _remove(id){
-    
-};
+
+}
 
 function _update(id, question){
-    
-};
+
+}
 
 function _updateInfo(info){
     _questionnaireInfo.title = info.title;
     _questionnaireInfo.description = info.description;
+    localStorage.setItem('questionnaireInfo', JSON.stringify(_questionnaireInfo));
     console.log("updated info:", _questionnaireInfo);
-}; 
+}
 
 //Store
 var QuestionStore = merge(EventEmitter.prototype, {
     getAll: function(){
         return _questions;
     },
-    
+
     getInfo: function(){
-        return _questionnaireInfo;  
+        return JSON.parse(localStorage.getItem('questionnaireInfo')) || _questionnaireInfo;
     },
-    
+
     emitChange: function() {
         this.emit(CHANGE_EVENT);
     },
-    
+
     addChangeListener: function(callback){
         this.on(CHANGE_EVENT, callback);
     },
-    
+
     removeChangeListener: function(callback) {
         this.removeListener(CHANGE_EVENT, callback);
     }
@@ -81,7 +82,7 @@ var QuestionStore = merge(EventEmitter.prototype, {
 //Registering actions
 EditorDispatcher.register(function(payload){
     var action = payload.action;
-                       
+
     switch(action.actionType){
         case ActionConstants.ADD_QUESTION:
             _create();
@@ -94,7 +95,7 @@ EditorDispatcher.register(function(payload){
             break;
     }
     QuestionStore.emitChange();
-    
+
     return true;
 })
 

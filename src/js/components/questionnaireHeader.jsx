@@ -1,5 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
+var Actions = require('../actions/editorActions');
 var QuestionHeader = require('./questionHeader.jsx');
 var ButtonBar = require('./buttonBar.jsx');
 
@@ -34,6 +35,7 @@ var QuestionnaireHeader = React.createClass({
                 </span>
             );
         }
+
         return (
             <header>
                 {content}
@@ -45,6 +47,7 @@ var QuestionnaireHeader = React.createClass({
     _toggleEdit: function(){
         if(this.state.isEditing){
             this.setState({isEditing: false});
+            Actions.updateInfo({title: this.state.title, description: this.state.description});
         }else{
             this.setState({isEditing: true});
         }
