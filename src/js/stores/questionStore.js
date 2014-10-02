@@ -50,7 +50,9 @@ function _update(id, question){
 };
 
 function _updateInfo(info){
-    
+    _questionnaireInfo.title = info.title;
+    _questionnaireInfo.description = info.description;
+    console.log("updated info:", _questionnaireInfo);
 }; 
 
 //Store
