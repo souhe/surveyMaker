@@ -10,6 +10,7 @@
     "gulp-concat": "^2.4.1",
     "gulp-webpack": "^0.3.0",
     "jsx-loader": "^0.11.0",
+    "node-uuid": "^1.4.1",
     "react": "^0.11.2",
     "webpack": "^1.4.1-beta1"
   },

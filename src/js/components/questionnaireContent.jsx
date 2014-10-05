@@ -1,5 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
+var AddingQuestionBar = require('./addingQuestionBar.jsx');
 
 var QuestionnaireContent = React.createClass({
     propTypes: {
@@ -7,9 +8,15 @@ var QuestionnaireContent = React.createClass({
     },
     render: function(){
         return (
-            <div>content</div>
+            <div>
+                <AddingQuestionBar submitType={this._addQuestion} />
+            </div>
         )
-    } 
+    } ,
+    
+    _addQuestion: function(){
+        
+    }
 });
 
 module.exports = QuestionnaireContent;

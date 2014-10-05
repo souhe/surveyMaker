@@ -2,43 +2,38 @@ var EditorDispatcher = require('../dispatchers/editorDispatcher.js');
 var merge = require('react/lib/merge');
 var EventEmitter = require('events').EventEmitter;
 var ActionConstants = require('../constants/actionConstants');
+var QuestionTypes = require('../constants/questionTypes');
+var uuidGenerator = require('node-uuid');
 
 var CHANGE_EVENT = 'change';
 
 var _questionnaireInfo = {
     title: "Popularnoć arbuzow w Polsce",
     description: "i <3 arbuzy!"
-}
+};
 var _questions = {};
 _questions[1] = {
     id: 1,
     type: "single",
     title: "Czy lubisz arbuzy?",
     description: "",
-    answers: [{
-        text: "tak"
-    }, {
-        text: "nie"
-    }]
+    questionData: {
+
+    }
+    
 };
 _questions[2] = {
     id: 2,
     type: "single",
     title: "Jaki jest standardowy rozmiar arbuza?",
     description: "O co chodzi z tymi arbuzami...",
-    answers: [{
-        text: "1 kg"
-    }, {
-        text: "2 kg"
-    }, {
-        text: "5 kg"
-    }, {
-        text: "10 kg"
-    }]
+    questionData: {}
 };
 
-function _create(){
-
+function _create(questionType){
+    var uuid = uuidGenerator.v1();
+    _questions[uuid] = {type: QuestionTypes.ESSAY, title: "", description: "", questionData: {}, id: uuid };
+    console.log("questions:", _questions);
 }
 
 function _remove(id){
@@ -85,7 +80,7 @@ EditorDispatcher.register(function(payload){
 
     switch(action.actionType){
         case ActionConstants.ADD_QUESTION:
-            _create();
+            _create(action.questionType);
             break;
         case ActionConstants.UPDATE_QUESTION:
             _update();
@@ -97,6 +92,6 @@ EditorDispatcher.register(function(payload){
     QuestionStore.emitChange();
 
     return true;
-})
+});
 
 module.exports = QuestionStore;

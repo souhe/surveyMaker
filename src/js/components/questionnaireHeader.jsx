@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
-var Actions = require('../actions/editorActions');
+var Actions = require('../actions/editorActions.js');
 var QuestionHeader = require('./questionHeader.jsx');
 var ButtonBar = require('./buttonBar.jsx');
 
