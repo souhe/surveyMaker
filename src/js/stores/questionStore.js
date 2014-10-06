@@ -14,7 +14,7 @@ var _questionnaireInfo = {
 var _questions = {};
 _questions[1] = {
     id: 1,
-    type: "single",
+    type: QuestionTypes.ESSAY,
     title: "Czy lubisz arbuzy?",
     description: "",
     questionData: {
@@ -24,7 +24,7 @@ _questions[1] = {
 };
 _questions[2] = {
     id: 2,
-    type: "single",
+    type: QuestionTypes.ESSAY,
     title: "Jaki jest standardowy rozmiar arbuza?",
     description: "O co chodzi z tymi arbuzami...",
     questionData: {}

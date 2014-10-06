@@ -1,22 +1,34 @@
 /** @jsx React.DOM */
 var React = require('react');
 var AddingQuestionBar = require('./addingQuestionBar.jsx');
+var Question = require('./question.jsx');
+var QuestionTypes = require('../constants/questionTypes.js');
+var EssayQuestion = require('./essayQuestion/essayQuestion.jsx');
 
 var QuestionnaireContent = React.createClass({
     propTypes: {
-        questions: React.PropTypes.object.isRequired
+        questions: React.PropTypes.object.isRequired,
+        //saveQuestion: React.PropTypes.func
     },
+    
     render: function(){
+        var questions = [];
+
+        for (var key in this.props.questions) {
+            var question = this.props.questions[key];
+            switch (question.type) {
+                case QuestionTypes.ESSAY :
+                    questions.push(<EssayQuestion question={question} />);
+                    break;
+            }
+        }
         return (
             <div>
+                {questions}
                 <AddingQuestionBar submitType={this._addQuestion} />
             </div>
-        )
-    } ,
-    
-    _addQuestion: function(){
-        
-    }
+        );
+    } 
 });
 
 module.exports = QuestionnaireContent;
