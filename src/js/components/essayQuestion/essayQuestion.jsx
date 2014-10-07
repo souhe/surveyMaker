@@ -1,26 +1,45 @@
 /** @jsx React.DOM*/
 var React = require('react');
+var EssayQuestionInEditMode = require('./essayQuestionInEditMode.jsx');
+var EssayQuestionInViewMode = require('./essayQuestionInViewMode.jsx');
 
 var EssayQuestion = React.createClass({
     propTypes: {
-        question: React.PropTypes.object.isRequired,
+        question: React.PropTypes.object.isRequired
         //saveQuestion: React.PropTypes.func
     },
     
     getInitialState: function(){
         return {
-            isEditing: false
+            isEditing: false,
+            question: this.props.question
         };
     },
     
     render: function(){
+        var content;
+        if(this.state.isEditing){
+            content = <EssayQuestionInEditMode question={this.state.question} onChange={this._onQuestionChanged}/>;
+        }else{
+            content = <EssayQuestionInViewMode question={this.state.question}/>;
+        }
+        
         return (
-            <div onBlur={this._cos}>EssayQuestion content - {this.props.question.title}</div>
+        <span>
+            {content}
+            <button onClick={this._toggleIsEditing}>/</button>
+            </span>
         );
     },
+
+    _onQuestionChanged: function(question){
+        this.setState({question: question});
+    },
     
-    _cos: function(){
-        alert('no');
+    _toggleIsEditing: function(){
+        this.setState({
+            isEditing: !this.state.isEditing
+        });
     }
 });
 

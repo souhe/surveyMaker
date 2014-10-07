@@ -24,7 +24,6 @@ var QuestionnaireHeader = React.createClass({
                 <span>
                     <input value={this.state.title} onChange={this._onTitleChange}/>
                     <input value={this.state.description} onChange={this._onDescriptionChange}/>
-
                 </span>
             );
         }else{
