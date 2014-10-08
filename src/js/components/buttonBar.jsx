@@ -3,7 +3,8 @@ var React = require('react');
 
 var ButtonBar = React.createClass({
     propsTypes: {
-        toggleEdit: React.PropTypes.func.isRequired
+        toggleEdit: React.PropTypes.func.isRequired,
+        onRemoveClick: React.PropTypes.func
     },
     
     getInitialState: function(){
@@ -17,6 +18,7 @@ var ButtonBar = React.createClass({
         return (
             <div class="button-bar">
                 <button onClick={this._toggleEdit} >{buttonText}</button>
+                <button onClick={this._remove} >Remove</button>
             </div>
         );
     },
@@ -26,6 +28,10 @@ var ButtonBar = React.createClass({
         this.setState({
             isEditing: !this.state.isEditing
         });
+    },
+    
+    _remove: function(){
+        this.props.onRemoveClick();
     }
 });
 

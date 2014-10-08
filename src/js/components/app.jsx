@@ -27,8 +27,6 @@ var App = React.createClass({
     render: function(){
         return(
             <div>
-                <h1>Survey Maker</h1>
-                
                 <QuestionnaireHeader info={this.state.info}/>
                 <QuestionnaireContent questions={this.state.allQuestions} />
             </div>

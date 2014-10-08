@@ -1,7 +1,10 @@
 /** @jsx React.DOM*/
 var React = require('react');
+var Actions = require('../../actions/editorActions.js');
+
 var EssayQuestionInEditMode = require('./essayQuestionInEditMode.jsx');
 var EssayQuestionInViewMode = require('./essayQuestionInViewMode.jsx');
+var ButtonBar = require('../buttonBar.jsx');
 
 var EssayQuestion = React.createClass({
     propTypes: {
@@ -25,10 +28,10 @@ var EssayQuestion = React.createClass({
         }
         
         return (
-        <span>
-            {content}
-            <button onClick={this._toggleIsEditing}>/</button>
-            </span>
+            <div className="question">
+                {content}
+                <ButtonBar toggleEdit={this._toggleEdit} onRemoveClick={this._remove} />
+            </div>
         );
     },
 
@@ -36,10 +39,15 @@ var EssayQuestion = React.createClass({
         this.setState({question: question});
     },
     
-    _toggleIsEditing: function(){
-        this.setState({
-            isEditing: !this.state.isEditing
-        });
+    _toggleEdit: function(){
+        this.setState({ isEditing: !this.state.isEditing });
+        if(this.state.isEditing){
+            Actions.updateQuestion(this.state.question);
+        }
+    },
+    
+    _remove: function(){
+        Actions.removeQuestion(this.state.question.id);
     }
 });
 

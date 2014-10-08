@@ -8,6 +8,7 @@
     "es6-promise": "^1.0.0",
     "gulp": "^3.8.8",
     "gulp-concat": "^2.4.1",
+    "gulp-less": "^1.3.6",
     "gulp-webpack": "^0.3.0",
     "jsx-loader": "^0.11.0",
     "node-uuid": "^1.4.1",

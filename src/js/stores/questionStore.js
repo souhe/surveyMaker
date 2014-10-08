@@ -6,42 +6,28 @@ var QuestionTypes = require('../constants/questionTypes');
 var uuidGenerator = require('node-uuid');
 
 var CHANGE_EVENT = 'change';
+var QUESTIONNAIRE_STORE = 'questionnaireStore2';
 
 var _questionnaireInfo = {
     title: "Popularnoć arbuzow w Polsce",
     description: "i <3 arbuzy!"
 };
-var _questions = {};
-_questions[1] = {
-    id: 1,
-    type: QuestionTypes.ESSAY,
-    title: "Czy lubisz arbuzy?",
-    description: "",
-    questionData: {
-
-    }
-    
-};
-_questions[2] = {
-    id: 2,
-    type: QuestionTypes.ESSAY,
-    title: "Jaki jest standardowy rozmiar arbuza?",
-    description: "O co chodzi z tymi arbuzami...",
-    questionData: {}
-};
+var _questions = JSON.parse(localStorage.getItem(QUESTIONNAIRE_STORE)) || {}; 
 
 function _create(questionType){
     var uuid = uuidGenerator.v1();
     _questions[uuid] = {type: QuestionTypes.ESSAY, title: "", description: "", questionData: {}, id: uuid };
-    console.log("questions:", _questions);
+    localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questions));
 }
 
 function _remove(id){
-
+    delete _questions[id];
+    localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questions));
 }
 
-function _update(id, question){
-
+function _update(question){
+    _questions[question.id] = question;
+     localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questions));
 }
 
 function _updateInfo(info){
@@ -54,7 +40,7 @@ function _updateInfo(info){
 //Store
 var QuestionStore = merge(EventEmitter.prototype, {
     getAll: function(){
-        return _questions;
+        return _questions || {};
     },
 
     getInfo: function(){
@@ -83,7 +69,10 @@ EditorDispatcher.register(function(payload){
             _create(action.questionType);
             break;
         case ActionConstants.UPDATE_QUESTION:
-            _update();
+            _update(action.question);
+            break;
+        case ActionConstants.REMOVE_QUESTION:
+            _remove(action.id);
             break;
         case ActionConstants.UPDATE_INFO:
             _updateInfo({title: action.title, description: action.description});

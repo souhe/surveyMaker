@@ -28,7 +28,6 @@ var AddingQuestionBar = React.createClass({
     },
     
     _handleAddClick: function(){
-        console.log("question Type", this.state.selectedType);
         EditorActions.addQuestion(this.state.selectedType);
         //if(typeof this.props.submitType === "function"){
         //    this.props.submitType();

@@ -8,12 +8,24 @@ var Actions = {
             questionType: type
         });
     },
+    updateQuestion: function(question){
+        Dispatcher.handleViewAction({
+            actionType: EditorConstants.UPDATE_QUESTION,
+            question: question  
+        });  
+    },
     updateInfo: function(info){
         Dispatcher.handleViewAction({
             actionType: EditorConstants.UPDATE_INFO,
             title: info.title,
             description: info.description
         });
+    },
+    removeQuestion: function(id){
+        Dispatcher.handleViewAction({
+            actionType: EditorConstants.REMOVE_QUESTION,
+            id: id
+        })
     }
 };
 

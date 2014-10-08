@@ -18,7 +18,7 @@ var QuestionnaireContent = React.createClass({
             var question = this.props.questions[key];
             switch (question.type) {
                 case QuestionTypes.ESSAY :
-                    questions.push(<EssayQuestion question={question} />);
+                    questions.push(<EssayQuestion question={question} key={question.id} />);
                     break;
             }
         }
