@@ -1,6 +1,7 @@
 /** @jsx React.DOM*/
 var React = require('react');
 var Actions = require('../../actions/editorActions.js');
+var cx = require('react/lib/cx');
 
 var EssayQuestionInEditMode = require('./essayQuestionInEditMode.jsx');
 var EssayQuestionInViewMode = require('./essayQuestionInViewMode.jsx');
@@ -8,8 +9,9 @@ var ButtonBar = require('../buttonBar.jsx');
 
 var EssayQuestion = React.createClass({
     propTypes: {
-        question: React.PropTypes.object.isRequired
-        //saveQuestion: React.PropTypes.func
+        question: React.PropTypes.object.isRequired,
+        onStartEditing: React.PropTypes.func,
+        onStopEditing: React.PropTypes.func
     },
     
     getInitialState: function(){
@@ -28,7 +30,9 @@ var EssayQuestion = React.createClass({
         }
         
         return (
-            <div className="question">
+            <div className={cx({
+            'question': true,
+            'isEditing': this.state.isEditing})}>
                 {content}
                 <ButtonBar toggleEdit={this._toggleEdit} onRemoveClick={this._remove} />
             </div>
@@ -43,6 +47,9 @@ var EssayQuestion = React.createClass({
         this.setState({ isEditing: !this.state.isEditing });
         if(this.state.isEditing){
             Actions.updateQuestion(this.state.question);
+            this.props.onStopEditing();
+        }else{
+            this.props.onStartEditing(this.state.question);
         }
     },
     
