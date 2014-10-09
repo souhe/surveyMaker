@@ -45,14 +45,11 @@ var EssayQuestion = React.createClass({
     },
     
     _toggleEdit: function(){
-/*        this.setState({ isEditing: !this.state.isEditing });*/
         if(this.state.question.isEditing){
             Actions.updateQuestion(this.state.question);
             Actions.changeEditingQuestion(null);
-/*            if(this.props.onStopEditing) this.props.onStopEditing();*/
         }else{
             Actions.changeEditingQuestion(this.state.question.id);
-/*            if(this.props.onStartEditing) this.props.onStartEditing(this.state.question);*/
         }
     },
     
