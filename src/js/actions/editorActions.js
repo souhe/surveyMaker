@@ -26,6 +26,12 @@ var Actions = {
             actionType: EditorConstants.REMOVE_QUESTION,
             id: id
         })
+    },
+    changeEditingQuestion: function(id){
+        Dispatcher.handleViewAction({
+            actionType: EditorConstants.CHANGE_EDITING,
+            id: id
+        })
     }
 };
 

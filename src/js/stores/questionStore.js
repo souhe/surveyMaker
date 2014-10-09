@@ -8,43 +8,60 @@ var uuidGenerator = require('node-uuid');
 var CHANGE_EVENT = 'change';
 var QUESTIONNAIRE_STORE = 'questionnaireStore2';
 
-var _questionnaireInfo = {
-    title: "Popularnoć arbuzow w Polsce",
-    description: "i <3 arbuzy!"
-};
-var _questions = JSON.parse(localStorage.getItem(QUESTIONNAIRE_STORE)) || {}; 
+var _questionnaire = {
+    info: {
+        title: "Title",
+        description: "Description"
+    },
+    questions: {},
+    actuallyEditingQuestionId: null
+}
 
 function _create(questionType){
     var uuid = uuidGenerator.v1();
-    _questions[uuid] = {type: QuestionTypes.ESSAY, title: "", description: "", questionData: {}, id: uuid };
-    localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questions));
+    _questionnaire.questions[uuid] = {
+        type: questionType,
+        title: "",
+        description: "",
+        questionData: [],
+        id: uuid,
+        isEditing: false
+    }
+    localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questionnaire.questions));
 }
 
 function _remove(id){
-    delete _questions[id];
-    localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questions));
+    delete _questionnaire.questions[id];
+    localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questionnaire.questions));
 }
 
 function _update(question){
-    _questions[question.id] = question;
-     localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questions));
+    _questionnaire.questions[question.id] = question;
+     localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questionnaire.questions));
 }
 
 function _updateInfo(info){
-    _questionnaireInfo.title = info.title;
-    _questionnaireInfo.description = info.description;
-    localStorage.setItem('questionnaireInfo', JSON.stringify(_questionnaireInfo));
-    console.log("updated info:", _questionnaireInfo);
+    _questionnaire.info.title = info.title;
+    _questionnaire.info.description = info.description;
+    localStorage.setItem('questionnaireInfo', JSON.stringify(_questionnaire.info));
+}
+
+function _changeEdtingQuestion(id){
+    if(_questionnaire.actuallyEditingQuestionId){
+        _questionnaire.questions[_questionnaire.actuallyEditingQuestionId].isEditing = false;
+    }
+    _questionnaire.questions[id].isEditing = true;
+    _questionnaire.actuallyEditingQuestionId = id;
 }
 
 //Store
 var QuestionStore = merge(EventEmitter.prototype, {
     getAll: function(){
-        return _questions || {};
+        return _questionnaire.questions || {};
     },
 
     getInfo: function(){
-        return JSON.parse(localStorage.getItem('questionnaireInfo')) || _questionnaireInfo;
+        return JSON.parse(localStorage.getItem('questionnaireInfo'));
     },
 
     emitChange: function() {
@@ -76,6 +93,9 @@ EditorDispatcher.register(function(payload){
             break;
         case ActionConstants.UPDATE_INFO:
             _updateInfo({title: action.title, description: action.description});
+            break;
+        case ActionConstants.CHANGE_EDITING:
+            _changeEdtingQuestion(action.id);
             break;
     }
     QuestionStore.emitChange();

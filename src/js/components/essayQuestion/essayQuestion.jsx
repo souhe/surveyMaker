@@ -23,7 +23,7 @@ var EssayQuestion = React.createClass({
     
     render: function(){
         var content;
-        if(this.state.isEditing){
+        if(this.state.question.isEditing){
             content = <EssayQuestionInEditMode question={this.state.question} onChange={this._onQuestionChanged}/>;
         }else{
             content = <EssayQuestionInViewMode question={this.state.question}/>;
@@ -31,8 +31,9 @@ var EssayQuestion = React.createClass({
         
         return (
             <div className={cx({
-            'question': true,
-            'isEditing': this.state.isEditing})}>
+                    'question': true,
+                    'isEditing': this.state.question.isEditing 
+                })}>
                 {content}
                 <ButtonBar toggleEdit={this._toggleEdit} onRemoveClick={this._remove} />
             </div>
@@ -44,12 +45,14 @@ var EssayQuestion = React.createClass({
     },
     
     _toggleEdit: function(){
-        this.setState({ isEditing: !this.state.isEditing });
-        if(this.state.isEditing){
+/*        this.setState({ isEditing: !this.state.isEditing });*/
+        if(this.state.question.isEditing){
             Actions.updateQuestion(this.state.question);
-            this.props.onStopEditing();
+            Actions.changeEditingQuestion(null);
+/*            if(this.props.onStopEditing) this.props.onStopEditing();*/
         }else{
-            this.props.onStartEditing(this.state.question);
+            Actions.changeEditingQuestion(this.state.question.id);
+/*            if(this.props.onStartEditing) this.props.onStartEditing(this.state.question);*/
         }
     },
     
