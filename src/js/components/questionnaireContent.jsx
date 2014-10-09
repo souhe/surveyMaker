@@ -2,7 +2,7 @@
 var React = require('react');
 var AddingQuestionBar = require('./addingQuestionBar.jsx');
 var QuestionTypes = require('../constants/questionTypes.js');
-var EssayQuestion = require('./essayQuestion/essayQuestion.jsx');
+var Question = require('./question.jsx');
 
 var QuestionnaireContent = React.createClass({
     
@@ -17,7 +17,7 @@ var QuestionnaireContent = React.createClass({
             var question = this.props.questions[key];
             switch (question.type) {
                 case QuestionTypes.ESSAY :
-                    questions.push(<EssayQuestion question={question} key={question.id} />);
+                    questions.push(<Question question={question} key={question.id} />);
                     break;
             }
         }

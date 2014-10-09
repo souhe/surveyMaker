@@ -33,6 +33,9 @@ function _create(questionType){
 function _remove(id){
     delete _questionnaire.questions[id];
     localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questionnaire.questions));
+    if(_questionnaire.actuallyEditingQuestionId == id){
+        _questionnaire.actuallyEditingQuestionId = null;
+    }
 }
 
 function _update(question){

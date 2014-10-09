@@ -1,13 +1,14 @@
 /** @jsx React.DOM*/
 var React = require('react');
-var Actions = require('../../actions/editorActions.js');
+var Actions = require('../actions/editorActions.js');
+var questionTypes = require('../constants/questionTypes.js')
 var cx = require('react/lib/cx');
 
-var EssayQuestionInEditMode = require('./essayQuestionInEditMode.jsx');
-var EssayQuestionInViewMode = require('./essayQuestionInViewMode.jsx');
-var ButtonBar = require('../buttonBar.jsx');
+var EssayQuestionInEditMode = require('./essayQuestion/essayQuestionInEditMode.jsx');
+var EssayQuestionInViewMode = require('./essayQuestion/essayQuestionInViewMode.jsx');
+var ButtonBar = require('./buttonBar.jsx');
 
-var EssayQuestion = React.createClass({
+var Question = React.createClass({
     propTypes: {
         question: React.PropTypes.object.isRequired,
         onStartEditing: React.PropTypes.func,
@@ -16,17 +17,19 @@ var EssayQuestion = React.createClass({
     
     getInitialState: function(){
         return {
-            isEditing: false,
             question: this.props.question
         };
     },
     
     render: function(){
         var content;
+        var questionComponents = this.getQuestionComponents(this.state.question.type);
+        var viewComponent = questionComponents.view;
+        var editComponent = questionComponents.edit;
         if(this.state.question.isEditing){
-            content = <EssayQuestionInEditMode question={this.state.question} onChange={this._onQuestionChanged}/>;
+            content = <viewComponent question={this.state.question} onChange={this._onQuestionChanged}/>;
         }else{
-            content = <EssayQuestionInViewMode question={this.state.question}/>;
+            content = <editComponent question={this.state.question}/>;
         }
         
         return (
@@ -35,7 +38,7 @@ var EssayQuestion = React.createClass({
                     'isEditing': this.state.question.isEditing 
                 })}>
                 {content}
-                <ButtonBar toggleEdit={this._toggleEdit} onRemoveClick={this._remove} />
+                <ButtonBar toggleEdit={this._toggleEdit} onRemoveClick={this._remove} isEditing={this.state.question.isEditing} />
             </div>
         );
     },
@@ -55,7 +58,15 @@ var EssayQuestion = React.createClass({
     
     _remove: function(){
         Actions.removeQuestion(this.state.question.id);
+    },
+    
+    getQuestionComponents: function(type){
+        switch (type){
+            case questionTypes.ESSAY:
+                return {view: EssayQuestionInEditMode, edit: EssayQuestionInViewMode}
+                break;
+        }
     }
 });
 
-module.exports = EssayQuestion;
+module.exports = Question;
