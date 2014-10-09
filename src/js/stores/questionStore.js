@@ -6,15 +6,19 @@ var QuestionTypes = require('../constants/questionTypes');
 var uuidGenerator = require('node-uuid');
 
 var CHANGE_EVENT = 'change';
-var QUESTIONNAIRE_STORE = 'questionnaireStore2';
+var QUESTIONNAIRE_STORE = 'questionnaireStore3';
 
 var _questionnaire = {
     info: {
         title: "Title",
         description: "Description"
     },
-    questions: {},
+    questions: JSON.parse(localStorage.getItem(QUESTIONNAIRE_STORE)) || {},
     actuallyEditingQuestionId: null
+}
+
+function _saveQuestionsToStorage(){
+    localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questionnaire.questions));
 }
 
 function _create(questionType){
@@ -27,12 +31,11 @@ function _create(questionType){
         id: uuid,
         isEditing: false
     }
-    localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questionnaire.questions));
+    _changeEdtingQuestion(uuid);
 }
 
 function _remove(id){
     delete _questionnaire.questions[id];
-    localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questionnaire.questions));
     if(_questionnaire.actuallyEditingQuestionId == id){
         _questionnaire.actuallyEditingQuestionId = null;
     }
@@ -40,7 +43,6 @@ function _remove(id){
 
 function _update(question){
     _questionnaire.questions[question.id] = question;
-     localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questionnaire.questions));
 }
 
 function _updateInfo(info){
@@ -53,7 +55,10 @@ function _changeEdtingQuestion(id){
     if(_questionnaire.actuallyEditingQuestionId){
         _questionnaire.questions[_questionnaire.actuallyEditingQuestionId].isEditing = false;
     }
-    _questionnaire.questions[id].isEditing = true;
+    
+    if(id){
+        _questionnaire.questions[id].isEditing = true;
+    }
     _questionnaire.actuallyEditingQuestionId = id;
 }
 
@@ -87,18 +92,22 @@ EditorDispatcher.register(function(payload){
     switch(action.actionType){
         case ActionConstants.ADD_QUESTION:
             _create(action.questionType);
+            _saveQuestionsToStorage();
             break;
         case ActionConstants.UPDATE_QUESTION:
             _update(action.question);
+            _saveQuestionsToStorage();
             break;
         case ActionConstants.REMOVE_QUESTION:
             _remove(action.id);
+            _saveQuestionsToStorage();
             break;
         case ActionConstants.UPDATE_INFO:
             _updateInfo({title: action.title, description: action.description});
             break;
         case ActionConstants.CHANGE_EDITING:
             _changeEdtingQuestion(action.id);
+            _saveQuestionsToStorage();
             break;
     }
     QuestionStore.emitChange();
