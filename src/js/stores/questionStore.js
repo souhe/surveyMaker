@@ -27,7 +27,7 @@ function _create(questionType){
         type: questionType,
         title: "",
         description: "",
-        questionData: [],
+        questionData: [""],
         id: uuid,
         isEditing: false
     }

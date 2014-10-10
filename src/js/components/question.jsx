@@ -6,6 +6,8 @@ var cx = require('react/lib/cx');
 
 var EssayQuestionInEditMode = require('./essayQuestion/essayQuestionInEditMode.jsx');
 var EssayQuestionInViewMode = require('./essayQuestion/essayQuestionInViewMode.jsx');
+var SingleQuestionInEditMode = require('./singleQuestion/singleQuestionInEditMode.jsx');
+var SingleQuestionInViewMode = require('./singleQuestion/singleQuestionInViewMode.jsx');
 var ButtonBar = require('./buttonBar.jsx');
 
 var Question = React.createClass({
@@ -27,9 +29,9 @@ var Question = React.createClass({
         var viewComponent = questionComponents.view;
         var editComponent = questionComponents.edit;
         if(this.state.question.isEditing){
-            content = <viewComponent question={this.state.question} onChange={this._onQuestionChanged}/>;
+            content = <editComponent question={this.state.question} onChange={this._onQuestionChanged}/>;
         }else{
-            content = <editComponent question={this.state.question}/>;
+            content = <viewComponent question={this.state.question}/>;
         }
         
         return (
@@ -42,9 +44,9 @@ var Question = React.createClass({
             </div>
         );
     },
-
-    _onQuestionChanged: function(question){
-        this.setState({question: question});
+    
+    _onQuestionChanged: function(question){	
+        this.setState({question: question});	
     },
     
     _toggleEdit: function(){
@@ -63,8 +65,10 @@ var Question = React.createClass({
     getQuestionComponents: function(type){
         switch (type){
             case questionTypes.ESSAY:
-                return {view: EssayQuestionInEditMode, edit: EssayQuestionInViewMode}
+                return {view: EssayQuestionInViewMode, edit: EssayQuestionInEditMode}
                 break;
+            case questionTypes.SINGLE:
+                return {view: SingleQuestionInViewMode, edit: SingleQuestionInEditMode}
         }
     }
 });

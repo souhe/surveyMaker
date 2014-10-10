@@ -15,17 +15,14 @@ var QuestionnaireContent = React.createClass({
 
         for (var key in this.props.questions) {
             var question = this.props.questions[key];
-            switch (question.type) {
-                case QuestionTypes.ESSAY :
-                    questions.push(<Question question={question} key={question.id} />);
-                    break;
-            }
+            questions.push(<Question question={question} key={question.id} />);
+            
         }
         
         return (
             <div>
                 {questions}
-                <AddingQuestionBar submitType={this._addQuestion} />
+                <AddingQuestionBar />
             </div>
         );
     } 

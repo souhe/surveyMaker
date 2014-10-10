@@ -5,10 +5,6 @@ var EditorActions = require('../actions/editorActions.js');
 
 var AddingQuestionBar = React.createClass({
 
-    propTypes:{
-        submitType: React.PropTypes.func
-    },
-
     getInitialState: function(){
         return{
             selectedType: QuestionTypes.ESSAY
@@ -29,9 +25,6 @@ var AddingQuestionBar = React.createClass({
     
     _handleAddClick: function(){
         EditorActions.addQuestion(this.state.selectedType);
-        //if(typeof this.props.submitType === "function"){
-        //    this.props.submitType();
-        //}
     },
     
     _onSelectChange: function(event){
