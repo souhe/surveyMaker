@@ -57,7 +57,7 @@ var SingleQuestionInEditMode = React.createClass({
     
     _handleAddingAnswer: function(event){
         var answers = this.state.answers;
-        answers.push("");
+        answers.push({text: "", id: answers.length + 1});
         this.setState({answers: answers});
     },
     

@@ -8,15 +8,30 @@ var uuidGenerator = require('node-uuid');
 var CHANGE_EVENT = 'change';
 var QUESTIONNAIRE_STORE = 'questionnaireStore3';
 
-var _questionnaire = {
-    info: {
-        title: "Title",
-        description: "Description"
-    },
-    questions: JSON.parse(localStorage.getItem(QUESTIONNAIRE_STORE)) || {},
-    actuallyEditingQuestionId: null
+var _questionnaire = _getQuestionnaireFromLS()
+
+function _getQuestionnaireFromLS(){
+    var questions = JSON.parse(localStorage.getItem(QUESTIONNAIRE_STORE)) || {};
+    var title = "Title";
+    var description =  "Description";
+    var actuallyEditingQuestionId;
+    for(var key in questions){
+        if(questions[key].isEditing){
+            actuallyEditingQuestionId = questions[key].id;
+        }
+    }
+    
+    return {
+        info: {
+            title: title,
+            description: description
+        },
+        questions: questions,
+        actuallyEditingQuestionId: actuallyEditingQuestionId
+    };
 }
 
+//Action helpers
 function _saveQuestionsToStorage(){
     localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questionnaire.questions));
 }
