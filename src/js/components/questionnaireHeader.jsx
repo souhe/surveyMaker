@@ -2,7 +2,7 @@
 var React = require('react');
 var Actions = require('../actions/editorActions.js');
 var QuestionHeader = require('./questionHeader.jsx');
-var ButtonBar = require('./buttonBar.jsx');
+var TitleButtonBar = require('./titleButtonBar.jsx');
 
 var QuestionnaireHeader = React.createClass({
     propTypes: {
@@ -38,7 +38,7 @@ var QuestionnaireHeader = React.createClass({
         return (
             <header>
                 {content}
-                <ButtonBar toggleEdit={this._toggleEdit}/>
+                <TitleButtonBar toggleEdit={this._toggleEdit}/>
             </header>
         );
     },

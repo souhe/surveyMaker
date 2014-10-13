@@ -6,14 +6,14 @@ var QuestionTypes = require('../constants/questionTypes');
 var uuidGenerator = require('node-uuid');
 
 var CHANGE_EVENT = 'change';
-var QUESTIONNAIRE_STORE = 'questionnaireStore3';
+var QUESTIONNAIRE_DATA = 'questionnaireData';
+var QUESTIONNAIRE_INFO = 'questionnaireInfo';
 
-var _questionnaire = _getQuestionnaireFromLS()
+var _questionnaire = _getQuestionnaireFromLS();
 
 function _getQuestionnaireFromLS(){
-    var questions = JSON.parse(localStorage.getItem(QUESTIONNAIRE_STORE)) || {};
-    var title = "Title";
-    var description =  "Description";
+    var questions = JSON.parse(localStorage.getItem(QUESTIONNAIRE_DATA)) || {};
+    var info = JSON.parse(localStorage.getItem(QUESTIONNAIRE_INFO)) || {};
     var actuallyEditingQuestionId;
     for(var key in questions){
         if(questions[key].isEditing){
@@ -23,8 +23,8 @@ function _getQuestionnaireFromLS(){
     
     return {
         info: {
-            title: title,
-            description: description
+            title: info.title,
+            description: info.description
         },
         questions: questions,
         actuallyEditingQuestionId: actuallyEditingQuestionId
@@ -33,7 +33,7 @@ function _getQuestionnaireFromLS(){
 
 //Action helpers
 function _saveQuestionsToStorage(){
-    localStorage.setItem(QUESTIONNAIRE_STORE, JSON.stringify(_questionnaire.questions));
+    localStorage.setItem(QUESTIONNAIRE_DATA, JSON.stringify(_questionnaire.questions));
 }
 
 function _create(questionType){
@@ -63,7 +63,7 @@ function _update(question){
 function _updateInfo(info){
     _questionnaire.info.title = info.title;
     _questionnaire.info.description = info.description;
-    localStorage.setItem('questionnaireInfo', JSON.stringify(_questionnaire.info));
+    localStorage.setItem(QUESTIONNAIRE_INFO, JSON.stringify(_questionnaire.info));
 }
 
 function _changeEdtingQuestion(id){

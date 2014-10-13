@@ -1,11 +1,10 @@
 /** @jsx React.DOM */
 var React = require('react');
 
-var ButtonBar = React.createClass({
+var TitleButtonBar = React.createClass({
     propsTypes: {
         isEditing: React.PropTypes.bool,
-        toggleEdit: React.PropTypes.func.isRequired,
-        onRemoveClick: React.PropTypes.func
+        toggleEdit: React.PropTypes.func.isRequired
     },
     
     getInitialState: function(){
@@ -19,18 +18,16 @@ var ButtonBar = React.createClass({
         return (
             <div class="button-bar">
                 <button onClick={this._toggleEdit} >{buttonText}</button>
-                <button onClick={this._remove} >Remove</button>
             </div>
         );
     },
     
     _toggleEdit: function(){
         this.props.toggleEdit();
-    },
-    
-    _remove: function(){
-        this.props.onRemoveClick();
+        this.setState({
+            isEditing: !this.state.isEditing
+        });
     }
 });
 
-module.exports = ButtonBar;
+module.exports = TitleButtonBar;
