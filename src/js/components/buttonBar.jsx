@@ -16,10 +16,12 @@ var ButtonBar = React.createClass({
     
     render: function(){
         var buttonText = this.props.isEditing? "Save" : "Edit";
+        var buttonClass="icon ";
+        buttonClass += this.props.isEditing? "icon-ok" : "icon-pencil";
         return (
-            <div class="button-bar">
-                <button onClick={this._toggleEdit} >{buttonText}</button>
-                <button onClick={this._remove} >Remove</button>
+            <div className="button-bar">
+                <span className={buttonClass} onClick={this._toggleEdit} title={buttonText} ></span>
+                <span className="icon icon-trash-1" onClick={this._remove} title="Remove" ></span>
             </div>
         );
     },

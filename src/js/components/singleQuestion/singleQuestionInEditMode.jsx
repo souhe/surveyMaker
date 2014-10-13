@@ -27,7 +27,7 @@ var SingleQuestionInEditMode = React.createClass({
                 <span>
                     <input type="radio" name={curr.props.question.id} />
                     <input type="text" key={answer.id} onChange={curr._onAnswerChange.bind(this, answer)} onBlur={curr._onSomethingChange} value={answer.text} placeholder="Add answer here"/>
-                    <a onClick={curr._handleDeletingAnswer.bind(this, answer)}>delete</a>
+                    <span onClick={curr._handleDeletingAnswer.bind(this, answer)} className="icon icon-cancel" title="Delete answer"></span>
                 </span>
             );
         });
@@ -36,7 +36,8 @@ var SingleQuestionInEditMode = React.createClass({
             <div>
                 <input type="text" onChange={this._onTitleChange} onBlur={curr._onSomethingChange} value={this.state.title} placeholder="Add question here"/>
                 <input type="text" onChange={this._onDescriptionChange} onBlur={curr._onSomethingChange}  value={this.state.description} placeholder="Add description here"/>
-                {answers} <button onClick={this._handleAddingAnswer}>add answer</button>
+                {answers} 
+                <span onClick={this._handleAddingAnswer} className="icon icon-plus" title="Add answer"></span>
             </div>
         );
     },
