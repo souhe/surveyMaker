@@ -17,8 +17,8 @@ var EssayQuestionInEditMode = React.createClass({
     render: function(){
         return (
             <div>
-                <input type="text" onChange={this._onTitleChange} value={this.state.title} placeholder="Add question here"/>
-                <input type="text" onChange={this._onDescriptionChange}  value={this.state.description} placeholder="Add description here"/>
+                <input type="text" onChange={this._onTitleChange} value={this.state.title}  onBlur={this._onSomethingChange} placeholder="Add question here"/>
+                <input type="text" onChange={this._onDescriptionChange}  value={this.state.description}  onBlur={this._onSomethingChange} placeholder="Add description here"/>
             </div>
         );
     },

@@ -23,8 +23,8 @@ function _getQuestionnaireFromLS(){
     
     return {
         info: {
-            title: info.title,
-            description: info.description
+            title: info.title || "",
+            description: info.description || ""
         },
         questions: questions,
         actuallyEditingQuestionId: actuallyEditingQuestionId
@@ -84,7 +84,7 @@ var QuestionStore = merge(EventEmitter.prototype, {
     },
 
     getInfo: function(){
-        return JSON.parse(localStorage.getItem('questionnaireInfo'));
+        return _questionnaire.info;
     },
 
     emitChange: function() {

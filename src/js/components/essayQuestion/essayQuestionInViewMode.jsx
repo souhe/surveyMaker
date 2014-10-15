@@ -9,8 +9,10 @@ var EssayQuestionInViewMode = React.createClass({
     render: function(){
         return (
             <div>
-                <h4>{this.props.question.title || 'Add question here'}</h4>
-                <h5>{this.props.question.description || 'Add description here'}</h5>
+                <div  className="question-header">
+                    <h4>{this.props.question.title || 'Add question here'}</h4>
+                    <h5>{this.props.question.description || 'Add description here'}</h5>
+                </div>
                 <input type="text" placeholder="answer"/>
             </div>
         );

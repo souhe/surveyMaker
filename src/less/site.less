@@ -1,4 +1,10 @@
 @import 'colors';
+
+.input-fields{
+    padding: .3rem .55rem;
+    margin: 4px 0;
+}
+
 body{
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-family: "Segoe UI","Segoe UI Web Regular","Segoe UI Symbol","Helvetica Neue","BBAlpha Sans","S60 Sans",Arial,sans-serif;
@@ -28,6 +34,11 @@ header{
     margin: 10px 0;
     background: white;
     
+    .question-header{
+        border-bottom: solid 1px lightgray;
+        margin-bottom: 20px;
+    }
+    
     .icon{
         cursor: pointer;
         opacity: 0.6;  
@@ -48,16 +59,37 @@ header{
     input[type="text"]{ 
         box-sizing: border-box;
         width: 100%;
-        margin: 4px 0;
+        .input-fields();
+    }
+    h2, .header-input{
+        font-size: 1.1rem;
     }
     
-    button{
-        margin: 0;
+    h1,h2,h3,h4,h5,h6{
+        margin: 0.4rem 0;
     }
+    
 }
 
 .isEditing{
     border-top: dashed 2px gray;
     border-bottom: dashed 2px gray;
-    
+    .answer{
+        display: flex;
+        input[type="radio"]{
+            margin-top: 0.8rem ;
+        }
+        input[type="text"]{
+            flex: 1;
+//            .input-fields();
+        }
+        
+        .icon{
+            border: solid 1px gray;
+            height: 100%;
+            background: red;
+            .input-fields();
+            padding: 0;
+        }
+    }
 }

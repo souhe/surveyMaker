@@ -10,13 +10,15 @@ var SingleQuestionInViewMode = React.createClass({
     var curr = this;
         var answers = this.props.question.questionData.map(function(answer){
             return (
-                <label><input type="radio" name={curr.props.question.id} />{answer}</label>
+                <div><label><input type="radio" name={curr.props.question.id} />{answer}</label></div>
             );
         });
         return (
             <div>
-                <h4>{this.props.question.title || 'Add question here'}</h4>
-                <h5>{this.props.question.description || 'Add description here'}</h5>
+                <div  className="question-header">
+                    <h2>{this.props.question.title || 'Add question here'}</h2>
+                    <h4>{this.props.question.description || 'Add description here'}</h4>
+                </div>
                 {answers}
             </div>
         );
