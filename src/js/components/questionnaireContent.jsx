@@ -3,6 +3,7 @@ var React = require('react');
 var AddingQuestionBar = require('./addingQuestionBar.jsx');
 var QuestionTypes = require('../constants/questionTypes.js');
 var Question = require('./question.jsx');
+var ReactCSSTransitionGroup = require('react/addons').addons.CSSTransitionGroup;
 
 var QuestionnaireContent = React.createClass({
     
@@ -21,7 +22,9 @@ var QuestionnaireContent = React.createClass({
         
         return (
             <div>
+            <ReactCSSTransitionGroup transitionName="example">
                 {questions}
+                </ReactCSSTransitionGroup>
                 <AddingQuestionBar />
             </div>
         );

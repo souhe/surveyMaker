@@ -17,6 +17,7 @@ var AddingQuestionBar = React.createClass({
                     <option value={QuestionTypes.ESSAY}>Essay question</option>
                     <option value={QuestionTypes.SINGLE}>Single question</option>
                     <option value={QuestionTypes.MULTIPLE}>Multiple question</option>
+                    <option value={QuestionTypes.MATRIX}>Matrix question</option>
                 </select>
                 <button onClick={this._handleAddClick}>Add question</button>
             </div>

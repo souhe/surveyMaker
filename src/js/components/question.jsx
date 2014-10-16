@@ -8,6 +8,8 @@ var EssayQuestionInEditMode = require('./essayQuestion/essayQuestionInEditMode.j
 var EssayQuestionInViewMode = require('./essayQuestion/essayQuestionInViewMode.jsx');
 var SingleQuestionInEditMode = require('./singleQuestion/singleQuestionInEditMode.jsx');
 var SingleQuestionInViewMode = require('./singleQuestion/singleQuestionInViewMode.jsx');
+var MultipleQuestionInEditMode = require('./multipleQuestion/multipleQuestionInEditMode.jsx');
+var MultipleQuestionInViewMode = require('./multipleQuestion/multipleQuestionInViewMode.jsx');
 var ButtonBar = require('./buttonBar.jsx');
 
 var Question = React.createClass({
@@ -39,7 +41,9 @@ var Question = React.createClass({
                     'question': true,
                     'isEditing': this.state.question.isEditing 
                 })}>
+                <span className="question-content">
                 {content}
+                </span>
                 <ButtonBar toggleEdit={this._toggleEdit} onRemoveClick={this._remove} isEditing={this.state.question.isEditing} />
             </div>
         );
@@ -69,6 +73,9 @@ var Question = React.createClass({
                 break;
             case questionTypes.SINGLE:
                 return {view: SingleQuestionInViewMode, edit: SingleQuestionInEditMode}
+                break;
+            case questionTypes.MULTIPLE:
+                return {view: MultipleQuestionInViewMode, edit: MultipleQuestionInEditMode} 
         }
     }
 });

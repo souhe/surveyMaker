@@ -10,7 +10,7 @@ var SingleQuestionInEditMode = React.createClass({
         var answers = this.state.answers.map(function(answer){
             return (
                 <span className="answer">
-                    <input type="radio" name={curr.props.question.id} />
+                    <input type="checkbox" name={curr.props.question.id} />
                     <input type="text" key={answer.id} onChange={curr._onAnswerChange.bind(this, answer)} onBlur={curr._onSomethingChange} value={answer.text} placeholder="Add answer here"/>
                     <div onClick={curr._handleDeletingAnswer.bind(this, answer)} className="icon icon-cancel" title="Delete answer"></div>
                 </span>

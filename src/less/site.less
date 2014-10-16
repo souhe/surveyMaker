@@ -27,12 +27,18 @@ header{
 }
 
 .question{
-    position: relative;
-    padding: 10px 20px;
+//    position: relative;
+//    padding: 10px 20px;
     border-top: solid 1px gray;
     border-bottom: solid 1px gray;
     margin: 10px 0;
     background: white;
+    display: flex;
+    
+    .question-content{
+        flex: 1;
+        padding: 10px 20px;
+    }
     
     .question-header{
         border-bottom: solid 1px lightgray;
@@ -48,11 +54,15 @@ header{
     }
     
     .button-bar{
-        position:absolute;
-        top: 10px;
-        right: 10px;
+        flex: 0 0 2rem;
+        order: -1;
+        background: gray;
+//        position:absolute;
+//        top: 10px;
+//        right: 10px;
         .icon{
             font-size: 1.1rem;
+            color: white;
         }
     }
 
@@ -71,12 +81,30 @@ header{
     
 }
 
+.example-enter {
+  opacity: 0.01;
+  transition: opacity .5s ease-in;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+}
+
+.example-leave {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+}
+
 .isEditing{
     border-top: dashed 2px gray;
     border-bottom: dashed 2px gray;
     .answer{
         display: flex;
-        input[type="radio"]{
+        input[type="radio"], input[type="checkbox"]{
             margin-top: 0.8rem ;
         }
         input[type="text"]{

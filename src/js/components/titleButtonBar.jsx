@@ -16,7 +16,7 @@ var TitleButtonBar = React.createClass({
     render: function(){
         var buttonText = this.props.isEditing? "Save" : "Edit";
         return (
-            <div class="button-bar">
+            <div className="button-bar">
                 <button onClick={this._toggleEdit} >{buttonText}</button>
             </div>
         );
