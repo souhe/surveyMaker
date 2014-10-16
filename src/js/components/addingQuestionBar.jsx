@@ -26,6 +26,7 @@ var AddingQuestionBar = React.createClass({
     
     _handleAddClick: function(){
         EditorActions.addQuestion(this.state.selectedType);
+        EditorActions.addRestorePoint();
     },
     
     _onSelectChange: function(event){

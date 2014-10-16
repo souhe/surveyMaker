@@ -7,20 +7,28 @@ var EssayQuestionInEditMode = React.createClass({
         onChange: React.PropTypes.func
     },
     
+    componentWillReceiveProps: function(){
+        this.setState(this._createStateFromProps());
+    },
+    
     getInitialState: function(){
-        return{
-            title: this.props.question.title,
-            description: this.props.question.description
-        }
+        return this._createStateFromProps();
     },
     
     render: function(){
         return (
             <div>
-                <input type="text" onChange={this._onTitleChange} value={this.state.title}  onBlur={this._onSomethingChange} placeholder="Add question here"/>
+                <input type="text" className="header-input" onChange={this._onTitleChange} value={this.state.title}  onBlur={this._onSomethingChange} placeholder="Add question here"/>
                 <input type="text" onChange={this._onDescriptionChange}  value={this.state.description}  onBlur={this._onSomethingChange} placeholder="Add description here"/>
             </div>
         );
+    },
+    
+    _createStateFromProps: function(){
+        return{
+            title: this.props.question.title,
+            description: this.props.question.description
+        };
     },
     
     _onTitleChange : function(event){

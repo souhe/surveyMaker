@@ -4,6 +4,8 @@ var EventEmitter = require('events').EventEmitter;
 var ActionConstants = require('../constants/actionConstants');
 var QuestionTypes = require('../constants/questionTypes');
 var uuidGenerator = require('node-uuid');
+var $ = require('jquery');
+var HistoryStore = require('./historyStore.js');
 
 var CHANGE_EVENT = 'change';
 var QUESTIONNAIRE_DATA = 'questionnaireData';
@@ -77,6 +79,20 @@ function _changeEdtingQuestion(id){
     _questionnaire.actuallyEditingQuestionId = id;
 }
 
+function _publish(){
+    $.ajax({
+        //TODO
+    });
+}
+
+function _undo(){
+    _questionnaire = HistoryStore.getPrevious() || _questionnaire;
+}
+
+function _redo(){
+    _questionnaire = HistoryStore.getNext() || _questionnaire;
+}
+
 //Store
 var QuestionStore = merge(EventEmitter.prototype, {
     getAll: function(){
@@ -123,6 +139,18 @@ EditorDispatcher.register(function(payload){
         case ActionConstants.CHANGE_EDITING:
             _changeEdtingQuestion(action.id);
             _saveQuestionsToStorage();
+            break;
+        case ActionConstants.PUBLISH:
+            _publish();
+            break;
+        case ActionConstants.ADD_RESTORE_POINT:
+            HistoryStore.addRestorePoint(_questionnaire);
+            break;
+        case ActionConstants.UNDO:
+            _undo();
+            break;
+        case ActionConstants.REDO:
+            _redo();
             break;
     }
     QuestionStore.emitChange();

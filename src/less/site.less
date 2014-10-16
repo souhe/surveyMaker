@@ -25,7 +25,7 @@ body{
 }
 
 header.nav-bar{
-    padding: 10px 10px; 
+//    padding: 10px 10px; 
     display: flex;
     position: fixed;
     left: -80px;
@@ -47,10 +47,11 @@ header.nav-bar{
     li{
         display: flex;
         list-style: none;
-        padding: 0;
+        padding: 10px;
         margin: 0;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
         
         .icon{
             display: block;
@@ -63,11 +64,15 @@ header.nav-bar{
             padding-right: 10px;
         }
     }
+    
+    li:hover{
+        background: black;
+    }
 }
 
 header.nav-bar:hover{
     left: 0;
-    box-shadow: 3px 0 3px rgba(54, 54, 54, 0.76);
+    box-shadow: 3px 0 5px rgba(54, 54, 54, 0.76);
     transition: all .2s ease-in;
 }
 

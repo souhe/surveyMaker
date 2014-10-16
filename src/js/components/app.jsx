@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 var QuestionStore = require('../stores/questionStore.js');
+var HistoryStore = require('../stores/historyStore.js');
 var NavBar = require('./navBar.jsx')
 var QuestionnaireHeader = require('./questionnaireHeader.jsx');
 var QuestionnaireContent = require('./questionnaireContent.jsx');

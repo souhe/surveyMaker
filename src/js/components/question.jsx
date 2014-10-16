@@ -19,6 +19,12 @@ var Question = React.createClass({
         onStopEditing: React.PropTypes.func
     },
     
+    componentWillReceiveProps: function(){
+        this.setState({
+            question: this.props.question
+        });
+    },
+    
     getInitialState: function(){
         return {
             question: this.props.question
@@ -50,7 +56,8 @@ var Question = React.createClass({
     },
     
     _onQuestionChanged: function(question){	
-        this.setState({question: question});	
+        this.setState({question: question});
+        Actions.addRestorePoint();
     },
     
     _toggleEdit: function(){
@@ -60,10 +67,12 @@ var Question = React.createClass({
         }else{
             Actions.changeEditingQuestion(this.state.question.id);
         }
+        Actions.addRestorePoint();
     },
     
     _remove: function(){
         Actions.removeQuestion(this.state.question.id);
+        Actions.addRestorePoint();
     },
     
     getQuestionComponents: function(type){

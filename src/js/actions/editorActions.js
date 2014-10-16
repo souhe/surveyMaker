@@ -32,6 +32,30 @@ var Actions = {
             actionType: EditorConstants.CHANGE_EDITING,
             id: id
         })
+    },
+    
+    publish: function(){
+        Dispatcher.handleViewAction({
+            actionType: EditorConstants.PUBLISH
+        });
+    },
+    
+    addRestorePoint: function(){
+        Dispatcher.handleViewAction({
+            actionType: EditorConstants.ADD_RESTORE_POINT
+        });
+    },
+    
+    undo: function(){
+        Dispatcher.handleViewAction({
+            actionType: EditorConstants.UNDO
+        });
+    },
+    
+    redo: function(){
+        Dispatcher.handleViewAction({
+            actionType: EditorConstants.REDO
+        });
     }
 };
 

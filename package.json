@@ -10,7 +10,9 @@
     "gulp-concat": "^2.4.1",
     "gulp-less": "^1.3.6",
     "gulp-webpack": "^0.3.0",
+    "jquery": "^2.1.1",
     "jsx-loader": "^0.11.0",
+    "merge": "^1.2.0",
     "node-uuid": "^1.4.1",
     "react": "^0.11.2",
     "webpack": "^1.4.1-beta1"

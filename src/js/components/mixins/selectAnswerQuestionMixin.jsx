@@ -7,7 +7,16 @@ var selectAnswerQuestionMixin = {
         onChange: React.PropTypes.func
     },
     
+    
+    componentWillReceiveProps: function(){
+        this.setState(this._createStateFromProps());
+    },
+    
     getInitialState: function(){
+        return this._createStateFromProps();
+    },
+    
+    _createStateFromProps: function(){
         var i = 0;
         var answers = this.props.question.questionData.map(function(answer){
             i++;
