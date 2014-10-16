@@ -36,10 +36,10 @@ var QuestionnaireHeader = React.createClass({
         }
 
         return (
-            <header>
+            <div className="question-header">
                 {content}
                 <TitleButtonBar toggleEdit={this._toggleEdit}/>
-            </header>
+            </div>
         );
     },
 

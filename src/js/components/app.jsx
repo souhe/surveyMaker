@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 var QuestionStore = require('../stores/questionStore.js');
-var TopBar = require('./topBar.jsx')
+var NavBar = require('./navBar.jsx')
 var QuestionnaireHeader = require('./questionnaireHeader.jsx');
 var QuestionnaireContent = require('./questionnaireContent.jsx');
 
@@ -28,9 +28,11 @@ var App = React.createClass({
     render: function(){
         return(
             <div>
-                <TopBar />
-                <QuestionnaireHeader info={this.state.info}/>
-                <QuestionnaireContent questions={this.state.allQuestions} />
+                <NavBar />
+                <div className="content">
+                    <QuestionnaireHeader info={this.state.info}/>
+                    <QuestionnaireContent questions={this.state.allQuestions} />
+                </div>
             </div>
         );
     },

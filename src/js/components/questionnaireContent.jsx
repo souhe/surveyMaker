@@ -22,8 +22,8 @@ var QuestionnaireContent = React.createClass({
         
         return (
             <div>
-            <ReactCSSTransitionGroup transitionName="example">
-                {questions}
+                <ReactCSSTransitionGroup transitionName="question">
+                    {questions}
                 </ReactCSSTransitionGroup>
                 <AddingQuestionBar />
             </div>
