@@ -22,6 +22,11 @@ var TopBar = React.createClass({
                         <span className="button-body">Undo</span>
                         <span className="icon icon-reply"></span>
                     </li>
+                    
+                    <li onClick={this.handleRedoClick}>
+                        <span className="button-body">Redo</span>
+                        <span className="icon icon-forward"></span>
+                    </li>
                 </ul>
             </header>
         );
@@ -33,6 +38,10 @@ var TopBar = React.createClass({
     
     handleUndoClick: function(){
         Actions.undo();
+    },
+    
+    handleRedoClick: function(){
+        Actions.redo();
     }
 });
 

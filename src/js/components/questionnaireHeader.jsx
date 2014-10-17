@@ -16,14 +16,21 @@ var QuestionnaireHeader = React.createClass({
             description: this.props.info.description || ''
         };
     },
+    
+    componentWillReceiveProps: function(newProps){
+        this.setState({
+            title: newProps.info.title || '',
+            description: newProps.info.description || ''
+        })
+    },
 
     render: function(){
         var content;
         if (this.state.isEditing) {
             content = (
                 <span>
-                    <input value={this.state.title} onChange={this._onTitleChange}/>
-                    <input value={this.state.description} onChange={this._onDescriptionChange}/>
+                    <input value={this.state.title} onChange={this._onTitleChange} onBlur={this._onSomethingChange}/>
+                    <input value={this.state.description} onChange={this._onDescriptionChange} onBlur={this._onSomethingChange}/>
                 </span>
             );
         }else{
@@ -55,12 +62,14 @@ var QuestionnaireHeader = React.createClass({
 
     _onTitleChange: function(event){
         this.setState({title: event.target.value});
-        Actions.addRestorePoint();
     },
 
     _onDescriptionChange: function(event){
         this.setState({description: event.target.value});
-        Actions.addRestorePoint();
+    },
+    
+    _onSomethingChange: function(){
+        Actions.addRestorePoint(); //TODO: fix, zmienia niepotrzebnie state tego komponentu
     }
 });
 

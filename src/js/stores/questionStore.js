@@ -125,36 +125,43 @@ EditorDispatcher.register(function(payload){
         case ActionConstants.ADD_QUESTION:
             _create(action.questionType);
             _saveQuestionsToStorage();
+            QuestionStore.emitChange();
             break;
         case ActionConstants.UPDATE_QUESTION:
             _update(action.question);
             _saveQuestionsToStorage();
+            QuestionStore.emitChange();
             break;
         case ActionConstants.REMOVE_QUESTION:
             _remove(action.id);
             _saveQuestionsToStorage();
+            QuestionStore.emitChange();
             break;
         case ActionConstants.UPDATE_INFO:
             _updateInfo({title: action.title, description: action.description});
+            QuestionStore.emitChange();
             break;
         case ActionConstants.CHANGE_EDITING:
             _changeEdtingQuestion(action.id);
             _saveQuestionsToStorage();
+            QuestionStore.emitChange();
             break;
         case ActionConstants.PUBLISH:
             _publish();
+            QuestionStore.emitChange();
             break;
         case ActionConstants.ADD_RESTORE_POINT:
             HistoryStore.addRestorePoint(_questionnaire);
             break;
         case ActionConstants.UNDO:
             _undo();
+            QuestionStore.emitChange();
             break;
         case ActionConstants.REDO:
             _redo();
+            QuestionStore.emitChange();
             break;
     }
-    QuestionStore.emitChange();
 
     return true;
 });

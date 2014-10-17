@@ -36,7 +36,14 @@ var HistoryStore = {
     },
     
     getNext: function(){
-        return  historyArray[historyArray.length-1].questionnaire; 
+        if(restorePointIdx < historyArray.length - 1){
+            restorePointIdx++;
+            var questionnaire = historyArray[restorePointIdx].questionnaire;
+            console.log("Active RP: ", restorePointIdx);
+            return questionnaire; 
+        }else{
+            return null;
+        }
     },
     
     addRestorePoint: function(questionnaire){
