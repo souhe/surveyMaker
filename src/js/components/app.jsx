@@ -39,7 +39,8 @@ var App = React.createClass({
     },
 
     _onChange: function() {
-        this.setState(getQuestionnaireState());
+        var newState = getQuestionnaireState();
+        this.setState(newState);
     }
 });
 

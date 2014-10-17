@@ -7,12 +7,12 @@ var EssayQuestionInEditMode = React.createClass({
         onChange: React.PropTypes.func
     },
     
-    componentWillReceiveProps: function(){
-        this.setState(this._createStateFromProps());
+    componentWillReceiveProps: function(nextProps){
+        this.setState(this._createStateFromProps(nextProps));
     },
     
     getInitialState: function(){
-        return this._createStateFromProps();
+        return this._createStateFromProps(this.props);
     },
     
     render: function(){
@@ -24,10 +24,10 @@ var EssayQuestionInEditMode = React.createClass({
         );
     },
     
-    _createStateFromProps: function(){
+    _createStateFromProps: function(nextProps){
         return{
-            title: this.props.question.title,
-            description: this.props.question.description
+            title: nextProps.question.title,
+            description: nextProps.question.description
         };
     },
     

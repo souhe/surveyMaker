@@ -18,6 +18,7 @@ function _addRestorePoint(questionnaire){
         historyArray.splice(0,1);
     }
     restorePointIdx = historyArray.length - 1;
+    console.log("new Restore Point. Array length: ", historyArray.length);
 }
 
 //Store
@@ -26,6 +27,7 @@ var HistoryStore = {
         if(restorePointIdx > 0){
             restorePointIdx--;
             var questionnaire = historyArray[restorePointIdx].questionnaire;
+            console.log("Active RP: ", restorePointIdx);
             return questionnaire; 
 
         }else{

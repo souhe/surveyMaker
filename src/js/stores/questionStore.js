@@ -12,6 +12,7 @@ var QUESTIONNAIRE_DATA = 'questionnaireData';
 var QUESTIONNAIRE_INFO = 'questionnaireInfo';
 
 var _questionnaire = _getQuestionnaireFromLS();
+HistoryStore.addRestorePoint(_questionnaire);
 
 function _getQuestionnaireFromLS(){
     var questions = JSON.parse(localStorage.getItem(QUESTIONNAIRE_DATA)) || {};

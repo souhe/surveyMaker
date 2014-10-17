@@ -19,9 +19,9 @@ var Question = React.createClass({
         onStopEditing: React.PropTypes.func
     },
     
-    componentWillReceiveProps: function(){
+    componentWillReceiveProps: function(nextProps){
         this.setState({
-            question: this.props.question
+            question: nextProps.question
         });
     },
     
@@ -66,8 +66,9 @@ var Question = React.createClass({
             Actions.changeEditingQuestion(null);
         }else{
             Actions.changeEditingQuestion(this.state.question.id);
+            Actions.addRestorePoint();
         }
-        Actions.addRestorePoint();
+        //Actions.addRestorePoint();
     },
     
     _remove: function(){

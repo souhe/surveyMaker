@@ -8,17 +8,17 @@ var selectAnswerQuestionMixin = {
     },
     
     
-    componentWillReceiveProps: function(){
-        this.setState(this._createStateFromProps());
+    componentWillReceiveProps: function(nextProps){
+        this.setState(this._createStateFromProps(nextProps));
     },
     
     getInitialState: function(){
-        return this._createStateFromProps();
+        return this._createStateFromProps(this.props);
     },
     
-    _createStateFromProps: function(){
+    _createStateFromProps: function(nextProps){
         var i = 0;
-        var answers = this.props.question.questionData.map(function(answer){
+        var answers = nextProps.question.questionData.map(function(answer){
             i++;
             return {text: answer, id: i}
         });

@@ -49,15 +49,18 @@ var QuestionnaireHeader = React.createClass({
             Actions.updateInfo({title: this.state.title, description: this.state.description});
         }else{
             this.setState({isEditing: true});
+            Actions.addRestorePoint();
         }
     },
 
     _onTitleChange: function(event){
         this.setState({title: event.target.value});
+        Actions.addRestorePoint();
     },
 
     _onDescriptionChange: function(event){
         this.setState({description: event.target.value});
+        Actions.addRestorePoint();
     }
 });
 
