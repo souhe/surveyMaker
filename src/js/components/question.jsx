@@ -10,6 +10,8 @@ var SingleQuestionInEditMode = require('./singleQuestion/singleQuestionInEditMod
 var SingleQuestionInViewMode = require('./singleQuestion/singleQuestionInViewMode.jsx');
 var MultipleQuestionInEditMode = require('./multipleQuestion/multipleQuestionInEditMode.jsx');
 var MultipleQuestionInViewMode = require('./multipleQuestion/multipleQuestionInViewMode.jsx');
+var MatrixQuestionInEditMode = require('./matrixQuestion/matrixQuestionInEditMode.jsx');
+var MatrixQuestionInViewMode = require('./matrixQuestion/matrixQuestionInViewMode.jsx');
 var ButtonBar = require('./buttonBar.jsx');
 
 var Question = React.createClass({
@@ -86,6 +88,9 @@ var Question = React.createClass({
                 break;
             case questionTypes.MULTIPLE:
                 return {view: MultipleQuestionInViewMode, edit: MultipleQuestionInEditMode} 
+                break;
+            case questionTypes.MATRIX:
+                return {view: MatrixQuestionInViewMode, edit: MatrixQuestionInEditMode} 
         }
     }
 });

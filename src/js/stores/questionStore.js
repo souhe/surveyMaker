@@ -45,7 +45,7 @@ function _create(questionType){
         type: questionType,
         title: "",
         description: "",
-        questionData: [""],
+        questionData: [""], //FIXME: remove ""
         id: uuid,
         isEditing: false
     }
