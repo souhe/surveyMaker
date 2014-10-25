@@ -8,7 +8,7 @@ var $ = require('jquery');
 var HistoryStore = require('./historyStore.js');
 
 var CHANGE_EVENT = 'change';
-var QUESTIONNAIRE_DATA = 'questionnaireData';
+var QUESTIONNAIRE_DATA = 'questionnaireData3';
 var QUESTIONNAIRE_INFO = 'questionnaireInfo';
 
 var _questionnaire = _getQuestionnaireFromLS();
@@ -45,11 +45,27 @@ function _create(questionType){
         type: questionType,
         title: "",
         description: "",
-        questionData: [""], //FIXME: remove ""
+        questionData: _generateQuestionDatabyType(questionType), 
         id: uuid,
         isEditing: false
     }
     _changeEdtingQuestion(uuid);
+}
+
+function _generateQuestionDatabyType(type){
+    switch (type){
+        case QuestionTypes.ESSAY:
+            return null;
+        case QuestionTypes.MULTIPLE:
+        case QuestionTypes.SINGLE:
+            return [""];
+        case QuestionTypes.MATRIX:
+            return {
+                values: ["1", "2", "3", "4"],
+                keys: ["test", "test 2"]
+            };       
+    }
+    return [];
 }
 
 function _remove(id){

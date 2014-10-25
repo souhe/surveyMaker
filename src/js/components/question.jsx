@@ -52,7 +52,7 @@ var Question = React.createClass({
                 <span className="question-content">
                 {content}
                 </span>
-                <ButtonBar toggleEdit={this._toggleEdit} onRemoveClick={this._remove} isEditing={this.state.question.isEditing} />
+                <ButtonBar toggleEdit={this._toggleEdit} onRemoveClick={this.z} isEditing={this.state.question.isEditing} />
             </div>
         );
     },

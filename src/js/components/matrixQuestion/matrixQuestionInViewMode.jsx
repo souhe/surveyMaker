@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require('react');
+var R = require('ramda');
 
 var MatrixQuestionInViewMode = React.createClass({
     propTypes: {
@@ -8,13 +9,15 @@ var MatrixQuestionInViewMode = React.createClass({
     },
     
     render: function(){
-        var emptyRows = this.props.question.questionData.values.map(function(){
-            return <td>o</td>
+        var values = this.props.question.questionData.values.map(function(value){
+            return <td>{value}</td>
         });
-        var keys = this.props.question.questionData.keys.map(function(key){       
+        var generateEmptyRowsForValues = this.generateEmptyRows(this.props.question.questionData.values);
+        var keys = this.props.question.questionData.keys.map(function(key){    
+            var emptyRows =  generateEmptyRowsForValues(key);
             return (
                 <tr>
-                    <td>key</td>
+                    <td>{key}</td>
                     {emptyRows}
                 </tr>
             );
@@ -28,7 +31,8 @@ var MatrixQuestionInViewMode = React.createClass({
                 <table>
                     <thead>
                         <tr>
-                            {this.props.question.questionData.values}
+                            <td></td>
+                            {values}
                         </tr>
                     </thead>
                     <tbody>
@@ -37,7 +41,14 @@ var MatrixQuestionInViewMode = React.createClass({
                 </table>
             </div>
         );
-    }
+    },
+    
+    generateEmptyRows: R.curry(function(values, name){
+        var rows = values.map(function(){
+            return <td><input type="radio" name={name}></input></td>
+        });
+        return rows;
+    })
 });
 
 module.exports = MatrixQuestionInViewMode;
