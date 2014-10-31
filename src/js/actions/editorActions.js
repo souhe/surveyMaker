@@ -11,8 +11,8 @@ var Actions = {
     updateQuestion: function(question){
         Dispatcher.handleViewAction({
             actionType: EditorConstants.UPDATE_QUESTION,
-            question: question  
-        });  
+            question: question
+        });
     },
     updateInfo: function(info){
         Dispatcher.handleViewAction({
@@ -33,25 +33,25 @@ var Actions = {
             id: id
         })
     },
-    
+
     publish: function(){
         Dispatcher.handleViewAction({
             actionType: EditorConstants.PUBLISH
         });
     },
-    
+
     addRestorePoint: function(){
         Dispatcher.handleViewAction({
             actionType: EditorConstants.ADD_RESTORE_POINT
         });
     },
-    
+
     undo: function(){
         Dispatcher.handleViewAction({
             actionType: EditorConstants.UNDO
         });
     },
-    
+
     redo: function(){
         Dispatcher.handleViewAction({
             actionType: EditorConstants.REDO

@@ -13,7 +13,7 @@ var EssayQuestionInViewMode = React.createClass({
                     <h4>{this.props.question.title || 'Add question here'}</h4>
                     <h5>{this.props.question.description || 'Add description here'}</h5>
                 </div>
-                <input type="text" placeholder="answer"/>
+                <input type="text" placeholder="answer"/> 
             </div>
         );
     }

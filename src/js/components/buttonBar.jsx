@@ -7,13 +7,13 @@ var ButtonBar = React.createClass({
         toggleEdit: React.PropTypes.func.isRequired,
         onRemoveClick: React.PropTypes.func
     },
-    
+
     getInitialState: function(){
         return {
             isEditing: this.props.isEditing
         };
     },
-    
+
     render: function(){
         var buttonText = this.props.isEditing? "Save" : "Edit";
         var buttonClass="icon ";
@@ -25,11 +25,11 @@ var ButtonBar = React.createClass({
             </div>
         );
     },
-    
+
     _toggleEdit: function(){
         this.props.toggleEdit();
     },
-    
+
     _remove: function(){
         this.props.onRemoveClick();
     }
